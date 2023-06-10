@@ -4,9 +4,7 @@
       <app-header :tabs="tabs" />
     </template>
 
-    <v-container fluid>
-      <router-view />
-    </v-container>
+    <router-view />
   </default-layout>
 </template>
 
