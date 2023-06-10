@@ -3,13 +3,10 @@ export type AppBarTab = {
   label: string;
 }
 
-export type MarkerCoordinates = {
-  latitude: string;
-  longitude: string;
-}
+export type Coordinates = [number, number];
 
 export type Marker = {
   id: string;
   label: string;
-  coordinates: MarkerCoordinates;
+  coordinates: Coordinates;
 }
