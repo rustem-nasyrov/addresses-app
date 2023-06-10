@@ -1,34 +1,29 @@
 <template>
-  <v-container>
-    <v-row>
+  <v-container
+    fluid
+    fill-height
+    class="pa-0"
+  >
+    <v-row
+      align="start"
+      no-gutters
+      class="fill-height"
+    >
       <v-col cols="3">
-        <v-card>
-          <v-card-title>Маркеры</v-card-title>
-          <v-card-text>
-            <v-list
-              nav
-              dense
-            >
-              <v-list-item
-                v-for="marker in markers"
-                :key="marker.id"
-                :to="{ name: 'marker', params: { id: marker.id } }"
-              >
-                <v-list-item-content>
-                  <v-list-item-title>
-                    {{ marker.label }}
-                  </v-list-item-title>
-                  <v-list-item-subtitle>
-                    {{ marker.coordinates | formatCoordinates }}
-                  </v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
-          </v-card-text>
-        </v-card>
+        <markers-card :markers="markers" />
       </v-col>
-      <v-col cols="7">
-        map
+      <v-col
+        cols="9"
+        class="fill-height"
+      >
+        <leaflet-map
+          :coordinates="coordinates"
+          :zoom="zoom"
+          :markers="markers"
+          @on-coordinates-update="setCoordinates"
+          @on-zoom-update="setZoom"
+          @on-add-marker="addMarker"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -36,37 +31,16 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {
-  VCard,
-  VCardText,
-  VCardTitle,
-  VList,
-  VListItem,
-  VListItemContent,
-  VListItemSubtitle,
-  VListItemTitle,
-} from 'vuetify/lib';
+import { mapActions, mapGetters } from 'vuex';
 
-import type { Marker, MarkerCoordinates } from '@/types';
+import { getUserCoordinates } from '@/utils';
 
 export default Vue.extend({
   name: 'MapView',
 
   components: {
-    VCard,
-    VCardText,
-    VCardTitle,
-    VList,
-    VListItem,
-    VListItemContent,
-    VListItemSubtitle,
-    VListItemTitle,
-  },
-
-  filters: {
-    formatCoordinates({ latitude, longitude }: MarkerCoordinates) {
-      return `${latitude}, ${longitude}`
-    },
+    MarkersCard: () => import('@/components/map/MarkersCard.vue'),
+    LeafletMap: () => import('@/components/map/LeafletMap.vue'),
   },
 
   data: () => ({
@@ -74,26 +48,23 @@ export default Vue.extend({
   }),
 
   computed: {
-    markers(): Marker[] {
-      return [
-        {
-          id: crypto.randomUUID(),
-          label: 'Marker #1',
-          coordinates: {
-            latitude: '53.2734',
-            longitude: '-7.77832031',
-          },
-        },
-        {
-          id: crypto.randomUUID(),
-          label: 'Marker #2',
-          coordinates: {
-            latitude: '53.2734',
-            longitude: '-7.77832031',
-          },
-        },
-      ];
-    },
+    ...mapGetters({
+      coordinates: 'map/coordinates',
+      zoom: 'map/zoom',
+      markers: 'map/markers',
+    }),
+  },
+
+  created () {
+    getUserCoordinates(this.setCoordinates);
+  },
+
+  methods: {
+    ...mapActions({
+      setCoordinates: 'map/setCoordinates',
+      setZoom: 'map/setZoom',
+      addMarker: 'map/addMarker',
+    }),
   },
 });
 </script>
