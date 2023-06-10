@@ -1,8 +1,8 @@
 import Vue from 'vue';
-import Vuetify from 'vuetify/lib';
+import Vuetify, { VApp, VAppBar, VContainer, VMain } from 'vuetify/lib';
 
-Vue.use(Vuetify);
+Vue.use(Vuetify, {
+  components: { VApp, VAppBar, VContainer, VMain },
+});
 
-const options = {};
-
-export default new Vuetify(options);
+export default new Vuetify();
