@@ -1,8 +1,8 @@
 import Vue from 'vue';
-import Vuetify, { VApp, VAppBar, VContainer, VMain } from 'vuetify/lib';
+import Vuetify, { VApp, VAppBar, VAppBarTitle, VCol, VContainer, VMain, VRow, VTab, VTabs } from 'vuetify/lib';
 
 Vue.use(Vuetify, {
-  components: { VApp, VAppBar, VContainer, VMain },
+  components: { VApp, VAppBar, VAppBarTitle, VCol, VContainer, VMain, VRow, VTab, VTabs },
 });
 
 export default new Vuetify();
