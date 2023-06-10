@@ -2,7 +2,7 @@
   <v-app-bar
     app
     shrink-on-scroll
-    src="https://picsum.photos/1920/1080?random"
+    :src="require('@/assets/images/cover.jpeg')"
   >
     <v-app-bar-title>Тестовое задание SquareGPS</v-app-bar-title>
     <template #extension>
