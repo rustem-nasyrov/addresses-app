@@ -5,4 +5,12 @@ Vue.use(Vuetify, {
   components: { VApp, VAppBar, VAppBarTitle, VCol, VContainer, VMain, VRow, VTab, VTabs },
 });
 
-export default new Vuetify();
+const options = {
+  presets: {
+    icons: {
+      iconfont: 'mdiSvg',
+    },
+  },
+};
+
+export default new Vuetify(options);
