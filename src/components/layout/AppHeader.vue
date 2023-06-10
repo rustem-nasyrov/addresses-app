@@ -2,6 +2,7 @@
   <v-app-bar
     app
     shrink-on-scroll
+    flat
     :src="require('@/assets/images/cover.jpeg')"
   >
     <v-app-bar-title>Тестовое задание SquareGPS</v-app-bar-title>
