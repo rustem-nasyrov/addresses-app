@@ -11,8 +11,16 @@ class ApiService implements Api {
 
       const data = await response.json();
 
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
       return [data, null];
     } catch (error: unknown) {
+      if ((error as Error).message) {
+        return [null, (error as Error).message]
+      }
+
       return [null, error];
     }
   }
