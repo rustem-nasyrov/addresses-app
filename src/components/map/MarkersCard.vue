@@ -5,7 +5,11 @@
   >
     <v-card-title>Маркеры</v-card-title>
     <v-card-text>
-      <markers-list :items="markers" />
+      <markers-list
+        v-if="markers.length"
+        :items="markers"
+      />
+      <i v-else>Список пуст</i>
     </v-card-text>
   </v-card>
 </template>
