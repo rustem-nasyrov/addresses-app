@@ -102,7 +102,7 @@ export default Vue.extend({
     },
 
     onMarkerSelect(id: number) {
-      const { coordinates } = this.markers.find((m: { id: number }) => m.id === id);
+      const { coordinates } = this.markers.find((m: { id: number }) => m.id === id) || {};
 
       if (coordinates) {
         this.selectMarkerId(id);
