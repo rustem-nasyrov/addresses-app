@@ -38,9 +38,8 @@ import Vue, { PropType } from 'vue';
 import { VBtn } from 'vuetify/lib';
 import { mdiPlus } from '@mdi/js';
 
-import L, {LeafletMouseEvent} from 'leaflet';
+import L, { LeafletMouseEvent } from 'leaflet';
 import { LControl, LMap, LMarker, LTileLayer } from 'vue2-leaflet';
-import { latLng } from 'leaflet';
 
 import type { Coordinates, Marker } from '@/types';
 import { DEFAULT_COORDINATES, DEFAULT_ZOOM } from '@/store/modules/map/consts';
