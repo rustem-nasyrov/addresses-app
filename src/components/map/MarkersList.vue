@@ -10,7 +10,7 @@
     >
       <v-list-item-content>
         <v-list-item-title>
-          {{ item.label }}
+          {{ item.displayName }}
         </v-list-item-title>
         <v-list-item-subtitle>
           {{ item.coordinates | formatCoordinates }}
