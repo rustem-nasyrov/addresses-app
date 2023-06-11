@@ -6,7 +6,8 @@ import {
   UPDATE_ZOOM,
 } from '@/store/modules/map/consts';
 
-import type { NamespacedStoreOptions } from '@/store/types';
+import type { Module } from 'vuex';
+import type { RootState } from '@/store/types';
 import type { MapState } from '@/store/modules/map/types';
 import type { Coordinates, Marker } from '@/types';
 
@@ -21,7 +22,7 @@ const createMarker = (coordinates: Coordinates): Marker => {
   }
 }
 
-export const MapModule: NamespacedStoreOptions<MapState> = {
+export const MapModule: Module<MapState, RootState> = {
   namespaced: true,
 
   state: () => ({
