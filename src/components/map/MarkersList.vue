@@ -3,20 +3,25 @@
     nav
     dense
   >
-    <v-list-item
-      v-for="item in items"
-      :key="item.id"
-      :to="{ name: 'marker', params: { id: item.id } }"
+    <v-list-item-group
+      :value="selectedMarkerId"
+      @change="$emit('on-select-marker', $event)"
     >
-      <v-list-item-content>
-        <v-list-item-title>
-          {{ item.displayName }}
-        </v-list-item-title>
-        <v-list-item-subtitle>
-          {{ item.coordinates | formatCoordinates }}
-        </v-list-item-subtitle>
-      </v-list-item-content>
-    </v-list-item>
+      <v-list-item
+        v-for="item in items"
+        :key="item.id"
+        :value="item.id"
+      >
+        <v-list-item-content>
+          <v-list-item-title>
+            {{ item.displayName }}
+          </v-list-item-title>
+          <v-list-item-subtitle>
+            {{ item.latitude }}, {{ item.longitude }}
+          </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list-item-group>
   </v-list>
 </template>
 
@@ -26,11 +31,12 @@ import {
   VList,
   VListItem,
   VListItemContent,
+  VListItemGroup,
   VListItemSubtitle,
   VListItemTitle,
 } from 'vuetify/lib';
 
-import type { Coordinates, Marker } from '@/types';
+import type { Marker } from '@/types';
 
 export default Vue.extend({
   name: 'MarkersList',
@@ -41,15 +47,15 @@ export default Vue.extend({
     VListItemContent,
     VListItemSubtitle,
     VListItemTitle,
-  },
-
-  filters: {
-    formatCoordinates([latitude, longitude]: Coordinates) {
-      return `${latitude}, ${longitude}`
-    },
+    VListItemGroup,
   },
 
   props: {
+    selectedMarkerId: {
+      type: [Number, null] as PropType<number | null>,
+      required: false,
+      default: () => null,
+    },
     items: {
       type: Array as PropType<Marker[]>,
       required: false,

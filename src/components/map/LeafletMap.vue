@@ -27,6 +27,7 @@
         v-for="marker in markers"
         :key="marker.id"
         :lat-lng="marker.coordinates"
+        @click="onMarkerClick(marker)"
       >
         <l-tooltip>
           {{ marker.displayName }}
@@ -106,10 +107,16 @@ export default Vue.extend({
     return {
       attribution: MAP_ATTRIBUTION,
       center: this.coordinates,
-      url: OPEN_STREET_MAP_URL,
       mapZoom: this.zoom,
       mdiPlus,
+      url: OPEN_STREET_MAP_URL,
     };
+  },
+
+  watch: {
+    coordinates(newValue) {
+      this.center = newValue;
+    },
   },
 
   methods: {
@@ -136,6 +143,13 @@ export default Vue.extend({
 
     addMarker(coordinates: Coordinates) {
       this.$emit('on-add-marker', coordinates);
+    },
+
+    onMarkerClick({ id, coordinates }: Marker) {
+      this.$nextTick(() => {
+        this.center = coordinates;
+        this.$emit('on-marker-click', id);
+      });
     },
   },
 });

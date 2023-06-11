@@ -8,6 +8,8 @@
       <markers-list
         v-if="markers.length"
         :items="markers"
+        :selected-marker-id="selectedMarkerId"
+        @on-select-marker="$emit('on-select-marker', $event)"
       />
       <i v-else>Список пуст</i>
     </v-card-text>
@@ -35,6 +37,11 @@ export default Vue.extend({
   },
 
   props: {
+    selectedMarkerId: {
+      type: [Number, null] as PropType<number | null>,
+      required: false,
+      default: () => null,
+    },
     markers: {
       type: Array as PropType<Marker[]>,
       required: false,

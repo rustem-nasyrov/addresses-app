@@ -10,7 +10,11 @@
       class="fill-height"
     >
       <v-col cols="3">
-        <markers-card :markers="markers" />
+        <markers-card
+          :markers="markers"
+          :selected-marker-id="selectedMarkerId"
+          @on-select-marker="onMarkerSelect"
+        />
       </v-col>
       <v-col
         cols="9"
@@ -23,6 +27,7 @@
           @on-coordinates-update="setCoordinates"
           @on-zoom-update="setZoom"
           @on-add-marker="onAddMarker"
+          @on-marker-click="selectMarkerId"
         />
         <v-snackbar
           :value="snackbarVisible"
@@ -64,9 +69,10 @@ export default Vue.extend({
     ...mapGetters({
       coordinates: 'map/coordinates',
       markers: 'markers/markers',
-      zoom: 'map/zoom',
+      selectedMarkerId: 'map/selectedMarkerId',
       snackbarMessage: 'markers/snackbarMessage',
       snackbarVisible: 'markers/snackbarVisible',
+      zoom: 'map/zoom',
     }),
     timeout: () => SNACKBAR_TIMEOUT,
   },
@@ -78,6 +84,7 @@ export default Vue.extend({
   methods: {
     ...mapActions({
       addMarker: 'markers/addMarker',
+      selectMarkerId: 'map/selectMarkerId',
       setCoordinates: 'map/setCoordinates',
       setZoom: 'map/setZoom',
       updateSnackbar: 'markers/updateSnackbar',
@@ -92,6 +99,15 @@ export default Vue.extend({
         visible: value,
         message: '',
       });
+    },
+
+    onMarkerSelect(id: number) {
+      const { coordinates } = this.markers.find((m: { id: number }) => m.id === id);
+
+      if (coordinates) {
+        this.selectMarkerId(id);
+        this.setCoordinates(coordinates);
+      }
     },
   },
 });
