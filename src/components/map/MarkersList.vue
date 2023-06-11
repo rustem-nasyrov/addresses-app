@@ -5,6 +5,7 @@
   >
     <v-list-item-group
       :value="selectedMarkerId"
+      color="primary"
       @change="$emit('on-select-marker', $event)"
     >
       <v-list-item
