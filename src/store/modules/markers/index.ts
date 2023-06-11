@@ -1,30 +1,73 @@
-import { UPDATE_DIALOG_VISIBILITY } from '@/store/modules/markers/consts';
+import { ADD_MARKER, UPDATE_SNACKBAR } from '@/store/modules/markers/consts';
 
 import type { Module } from 'vuex';
+import type { Coordinates, GeocodeData, Marker } from '@/types';
 import type { RootState } from '@/store/types';
 import type { MarkersState } from '@/store/modules/markers/types';
+
+import { geocodeService } from '@/services/geocode';
+
+type SnackBar = MarkersState['snackbar'];
+
+const createMarker = (data: GeocodeData): Marker => {
+  return {
+    ...data,
+    coordinates: [+data.latitude, +data.longitude],
+  }
+}
 
 export const MarkersModule: Module<MarkersState, RootState> = {
   namespaced: true,
 
   state: () => ({
-    isDialogOpen: false,
     markers: [],
+    snackbar: {
+      visible: false,
+      message: '',
+    },
   }),
 
   mutations: {
-    [UPDATE_DIALOG_VISIBILITY]: (state, isDialogOpen: boolean) => {
-      state.isDialogOpen = isDialogOpen;
+    [ADD_MARKER]: (state, marker) => {
+      state.markers.push(marker);
+    },
+
+    [UPDATE_SNACKBAR]: (state, snackbar: SnackBar) => {
+      state.snackbar = snackbar;
     },
   },
 
   actions: {
-    setDialogVisibility: ({ commit }, isDialogOpen: boolean) => {
-      commit(UPDATE_DIALOG_VISIBILITY, isDialogOpen);
+    addMarker: async ({ commit, dispatch, getters }, coordinates: Coordinates) => {
+      const [data, error] = await geocodeService.getStreet(coordinates);
+
+      if (error) {
+        await dispatch('updateSnackbar', {
+          visible: true,
+          message: error,
+        });
+      } else if (data) {
+        const markers = getters.markers;
+
+        if (markers.findIndex((m: Marker) => m.id === data.id) > -1) {
+          await dispatch('updateSnackbar', {
+            visible: true,
+            message: 'Already added',
+          })
+        } else {
+          commit(ADD_MARKER, createMarker(data));
+        }
+      }
+    },
+
+    updateSnackbar: ({ commit }, snackbar: SnackBar) => {
+      commit(UPDATE_SNACKBAR, snackbar);
     },
   },
 
   getters: {
-    isDialogOpen: (state) => state.isDialogOpen,
+    markers: (state) => state.markers,
+    snackbarMessage: (state) => state.snackbar.message,
+    snackbarVisible: (state) => state.snackbar.visible,
   },
 };

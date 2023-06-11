@@ -1,6 +1,9 @@
 import { Marker } from '@/types';
 
 export type MarkersState = {
-  isDialogOpen: boolean;
-  markers: Marker[];
+  snackbar: {
+    visible: boolean;
+    message: string;
+  };
+  markers:  Marker[];
 }
