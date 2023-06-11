@@ -27,7 +27,19 @@
         v-for="marker in markers"
         :key="marker.id"
         :lat-lng="marker.coordinates"
-      />
+      >
+        <l-tooltip>
+          {{ marker.displayName }}
+        </l-tooltip>
+        <l-popup>
+          {{ marker.displayName }}
+          <br>
+          <br>
+          Latitude: {{ marker.latitude }}
+          <br>
+          Longitude: {{ marker.longitude }}
+        </l-popup>
+      </l-marker>
     </template>
   </l-map>
 </template>
@@ -39,7 +51,7 @@ import { VBtn } from 'vuetify/lib';
 import { mdiPlus } from '@mdi/js';
 
 import L, { LeafletMouseEvent } from 'leaflet';
-import { LControl, LMap, LMarker, LTileLayer } from 'vue2-leaflet';
+import { LControl, LMap, LMarker, LPopup, LTileLayer, LTooltip } from 'vue2-leaflet';
 
 import type { Coordinates, Marker } from '@/types';
 import { DEFAULT_COORDINATES, DEFAULT_ZOOM } from '@/store/modules/map/consts';
@@ -68,6 +80,8 @@ export default Vue.extend({
     LMap,
     LMarker,
     LTileLayer,
+    LTooltip,
+    LPopup,
   },
 
   props: {
@@ -110,7 +124,10 @@ export default Vue.extend({
     },
 
     onMapClick({ latlng }: LeafletMouseEvent) {
-      this.addMarker([latlng.lat, latlng.lng])
+      const coordinates: Coordinates = [latlng.lat, latlng.lng];
+
+      this.center = coordinates;
+      this.addMarker(coordinates);
     },
 
     onAddMarkerClick() {
