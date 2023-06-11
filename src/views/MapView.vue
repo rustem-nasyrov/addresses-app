@@ -24,11 +24,17 @@
           @on-zoom-update="setZoom"
           @on-add-marker="onAddMarker"
         />
-        <marker-dialog
-          v-if="isDialogOpen"
-          :is-open="isDialogOpen"
-          @on-toggle="toggleMarkerDialog"
-        />
+        <v-snackbar
+          :value="snackbarVisible"
+          top
+          right
+          absolute
+          color="red"
+          :timeout="timeout"
+          @input="closeSnackbar"
+        >
+          {{ snackbarMessage }}
+        </v-snackbar>
       </v-col>
     </v-row>
   </v-container>
@@ -38,6 +44,9 @@
 import Vue from 'vue';
 import { mapActions, mapGetters } from 'vuex';
 
+import { VSnackbar } from 'vuetify/lib';
+
+import { SNACKBAR_TIMEOUT } from '@/consts';
 import { getUserCoordinates } from '@/utils';
 
 import type { Coordinates } from '@/types';
@@ -46,18 +55,20 @@ export default Vue.extend({
   name: 'MapView',
 
   components: {
-    MarkerDialog: () => import('@/components/dialogs/MarkerDialog.vue'),
     MarkersCard: () => import('@/components/map/MarkersCard.vue'),
     LeafletMap: () => import('@/components/map/LeafletMap.vue'),
+    VSnackbar,
   },
 
   computed: {
     ...mapGetters({
       coordinates: 'map/coordinates',
+      markers: 'markers/markers',
       zoom: 'map/zoom',
-      markers: 'map/markers',
-      isDialogOpen: 'markers/isDialogOpen',
+      snackbarMessage: 'markers/snackbarMessage',
+      snackbarVisible: 'markers/snackbarVisible',
     }),
+    timeout: () => SNACKBAR_TIMEOUT,
   },
 
   created () {
@@ -66,15 +77,28 @@ export default Vue.extend({
 
   methods: {
     ...mapActions({
+      addMarker: 'markers/addMarker',
       setCoordinates: 'map/setCoordinates',
       setZoom: 'map/setZoom',
-      addMarker: 'map/addMarker',
-      toggleMarkerDialog: 'markers/setDialogVisibility',
+      updateSnackbar: 'markers/updateSnackbar',
     }),
 
-    onAddMarker() {
-      this.toggleMarkerDialog(true);
+    onAddMarker(coordinates: Coordinates) {
+      this.addMarker(coordinates);
+    },
+
+    closeSnackbar(value: boolean) {
+      this.updateSnackbar({
+        visible: value,
+        message: '',
+      });
     },
   },
 });
 </script>
+
+<style lang="scss">
+.v-snack {
+  z-index: 999;
+}
+</style>
