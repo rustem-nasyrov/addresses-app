@@ -22,7 +22,12 @@
           :markers="markers"
           @on-coordinates-update="setCoordinates"
           @on-zoom-update="setZoom"
-          @on-add-marker="addMarker"
+          @on-add-marker="onAddMarker"
+        />
+        <marker-dialog
+          v-if="isDialogOpen"
+          :is-open="isDialogOpen"
+          @on-toggle="toggleMarkerDialog"
         />
       </v-col>
     </v-row>
@@ -35,23 +40,23 @@ import { mapActions, mapGetters } from 'vuex';
 
 import { getUserCoordinates } from '@/utils';
 
+import type { Coordinates } from '@/types';
+
 export default Vue.extend({
   name: 'MapView',
 
   components: {
+    MarkerDialog: () => import('@/components/dialogs/MarkerDialog.vue'),
     MarkersCard: () => import('@/components/map/MarkersCard.vue'),
     LeafletMap: () => import('@/components/map/LeafletMap.vue'),
   },
-
-  data: () => ({
-    currentMarker: null,
-  }),
 
   computed: {
     ...mapGetters({
       coordinates: 'map/coordinates',
       zoom: 'map/zoom',
       markers: 'map/markers',
+      isDialogOpen: 'markers/isDialogOpen',
     }),
   },
 
@@ -64,7 +69,12 @@ export default Vue.extend({
       setCoordinates: 'map/setCoordinates',
       setZoom: 'map/setZoom',
       addMarker: 'map/addMarker',
+      toggleMarkerDialog: 'markers/setDialogVisibility',
     }),
+
+    onAddMarker() {
+      this.toggleMarkerDialog(true);
+    },
   },
 });
 </script>
