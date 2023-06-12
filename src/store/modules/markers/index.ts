@@ -1,10 +1,18 @@
-import { ADD_MARKER, UPDATE_SNACKBAR } from '@/store/modules/markers/consts';
+import {
+  ADD_MARKER,
+  REPLACE_MARKERS,
+  SNACKBAR_ERROR_COLOR,
+  SNACKBAR_SUCCESS_COLOR,
+  UPDATE_SNACKBAR,
+} from '@/store/modules/markers/consts';
+import { SUCCESS_STATUS_TEXT } from '@/consts';
 
 import type { Module } from 'vuex';
 import type { Coordinates, GeocodeData, Marker } from '@/types';
 import type { RootState } from '@/store/types';
 import type { MarkersState } from '@/store/modules/markers/types';
 
+import { backendService } from '@/services/backend';
 import { geocodeService } from '@/services/geocode';
 
 type SnackBar = MarkersState['snackbar'];
@@ -24,12 +32,17 @@ export const MarkersModule: Module<MarkersState, RootState> = {
     snackbar: {
       visible: false,
       message: '',
+      color: '',
     },
   }),
 
   mutations: {
     [ADD_MARKER]: (state, marker) => {
       state.markers.push(marker);
+    },
+
+    [REPLACE_MARKERS]: (state, markers: Marker[]) => {
+      state.markers = markers;
     },
 
     [UPDATE_SNACKBAR]: (state, snackbar: SnackBar) => {
@@ -45,6 +58,7 @@ export const MarkersModule: Module<MarkersState, RootState> = {
         await dispatch('updateSnackbar', {
           visible: true,
           message: error,
+          color: SNACKBAR_ERROR_COLOR,
         });
       } else if (data) {
         const markers = getters.markers;
@@ -53,9 +67,26 @@ export const MarkersModule: Module<MarkersState, RootState> = {
           await dispatch('updateSnackbar', {
             visible: true,
             message: 'Already added',
+            color: SNACKBAR_ERROR_COLOR,
           });
         } else {
-          commit(ADD_MARKER, createMarker(data));
+          const marker = createMarker(data);
+          const { status} = await backendService.addMarker<Marker>(marker);
+
+          if (SUCCESS_STATUS_TEXT === status) {
+            await dispatch('updateSnackbar', {
+              visible: true,
+              message: 'Added',
+              color: SNACKBAR_SUCCESS_COLOR,
+            });
+            commit(ADD_MARKER, marker);
+          } else {
+            await dispatch('updateSnackbar', {
+              visible: true,
+              message: 'Something went wrong',
+              color: SNACKBAR_ERROR_COLOR,
+            });
+          }
         }
       }
     },
@@ -63,11 +94,24 @@ export const MarkersModule: Module<MarkersState, RootState> = {
     updateSnackbar: ({ commit }, snackbar: SnackBar) => {
       commit(UPDATE_SNACKBAR, snackbar);
     },
+
+    getMarkers: async ({ commit, dispatch }) => {
+      const { status, data } = await backendService.getAllMarkers();
+
+      if (SUCCESS_STATUS_TEXT === status) {
+        commit(REPLACE_MARKERS, data);
+      } else {
+        await dispatch('updateSnackbar', {
+          visible: true,
+          message: 'Failed to fetch markers',
+          color: SNACKBAR_ERROR_COLOR,
+        });
+      }
+    },
   },
 
   getters: {
     markers: (state) => state.markers,
-    snackbarMessage: (state) => state.snackbar.message,
-    snackbarVisible: (state) => state.snackbar.visible,
+    snackbar: (state) => state.snackbar,
   },
 };
