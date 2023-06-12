@@ -1,6 +1,8 @@
+import type { TranslateResult } from 'vue-i18n';
+
 export type AppBarTab = {
   to: string;
-  label: string;
+  label: TranslateResult | string;
 };
 
 export type GeocodeAddressRaw = {
