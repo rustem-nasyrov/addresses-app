@@ -10,7 +10,7 @@ export const routes: RouteConfig[] = [
       /* webpackPrefetch: true */
       /* webpackPreload: true */
       '@/views/HomeView.vue',
-      ),
+    ),
   },
   {
     path: '/map',
@@ -21,7 +21,7 @@ export const routes: RouteConfig[] = [
       /* webpackPrefetch: true */
       /* webpackPreload: true */
       '@/views/MapView.vue',
-      ),
+    ),
     children: [
       {
         path: '/map/:id',
