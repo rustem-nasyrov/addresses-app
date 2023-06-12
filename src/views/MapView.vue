@@ -115,7 +115,10 @@ export default Vue.extend({
 
     onSelectMarker(id?: number) {
       if (!id) {
-        this.$router.push({ name: 'map' });
+        if (this.$route.name !== 'map') {
+          this.$router.push({ name: 'map' });
+        }
+
         this.selectMarkerId(null);
       } else {
         const { coordinates } = this.markers.find((m: { id: number }) => m.id === id) || {};
