@@ -4,3 +4,4 @@ export const MAP_ATTRIBUTION =
 export const SNACKBAR_TIMEOUT = 3000;
 export const REJECT_STATUS_TEXT = 'error';
 export const SUCCESS_STATUS_TEXT = 'success';
+export const LOCAL_STORAGE_LOCALE_KEY = 'locale';

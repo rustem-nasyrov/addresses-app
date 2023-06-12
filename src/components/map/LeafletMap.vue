@@ -49,9 +49,9 @@
           {{ marker.displayName }}
           <br>
           <br>
-          Latitude: {{ marker.latitude }}
+          {{ $t('map.latitude') }}: {{ marker.latitude }}
           <br>
-          Longitude: {{ marker.longitude }}
+          {{ $t('map.longitude') }}: {{ marker.longitude }}
         </l-popup>
       </l-marker>
     </template>

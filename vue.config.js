@@ -31,6 +31,11 @@ module.exports = defineConfig({
             test: /[\\/]node_modules[\\/]vue[\\/]/,
             reuseExistingChunk: true,
           },
+          vue18n: {
+            name: 'vue18n',
+            test: /[\\/]node_modules[\\/]vue-i18n/,
+            reuseExistingChunk: true,
+          },
           vue2leaflet: {
             name: 'vue2leaflet',
             test: /[\\/]node_modules[\\/]vue2-leaflet/,
