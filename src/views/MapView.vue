@@ -30,15 +30,15 @@
           @on-marker-click="onSelectMarker"
         />
         <v-snackbar
-          :value="snackbarVisible"
+          :value="snackbar.visible"
           top
           right
           absolute
-          color="red"
+          :color="snackbar.color"
           :timeout="timeout"
           @input="closeSnackbar"
         >
-          {{ snackbarMessage }}
+          {{ snackbar.message }}
         </v-snackbar>
       </v-col>
     </v-row>
@@ -81,14 +81,14 @@ export default Vue.extend({
       coordinates: 'map/coordinates',
       markers: 'markers/markers',
       selectedMarkerId: 'map/selectedMarkerId',
-      snackbarMessage: 'markers/snackbarMessage',
-      snackbarVisible: 'markers/snackbarVisible',
+      snackbar: 'markers/snackbar',
       zoom: 'map/zoom',
     }),
     timeout: () => SNACKBAR_TIMEOUT,
   },
 
-  created() {
+  async created() {
+    await this.getAllMarkers();
     getUserCoordinates(this.setCoordinates);
   },
 
@@ -99,6 +99,7 @@ export default Vue.extend({
       setCoordinates: 'map/setCoordinates',
       setZoom: 'map/setZoom',
       updateSnackbar: 'markers/updateSnackbar',
+      getAllMarkers: 'markers/getMarkers',
     }),
 
     onAddMarker(coordinates: Coordinates) {
