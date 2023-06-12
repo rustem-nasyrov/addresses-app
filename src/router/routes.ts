@@ -4,12 +4,24 @@ export const routes: RouteConfig[] = [
   {
     path: '/',
     name: 'home',
-    component: () => import('@/views/HomeView.vue'),
+    component: () => import(
+      /* webpackChunkName: 'home-view' */
+      /* webpackMode: 'lazy-once' */
+      /* webpackPrefetch: true */
+      /* webpackPreload: true */
+      '@/views/HomeView.vue',
+      ),
   },
   {
     path: '/map',
     name: 'map',
-    component: () => import('@/views/MapView.vue'),
+    component: () => import(
+      /* webpackChunkName: 'map-view' */
+      /* webpackMode: 'lazy-once' */
+      /* webpackPrefetch: true */
+      /* webpackPreload: true */
+      '@/views/MapView.vue',
+      ),
     children: [
       {
         path: '/map/:id',

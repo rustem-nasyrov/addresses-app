@@ -28,28 +28,11 @@
 
 <script lang="ts">
 import Vue, { PropType } from 'vue';
-import {
-  VList,
-  VListItem,
-  VListItemContent,
-  VListItemGroup,
-  VListItemSubtitle,
-  VListItemTitle,
-} from 'vuetify/lib';
 
 import type { Marker } from '@/types';
 
 export default Vue.extend({
   name: 'MarkersList',
-
-  components: {
-    VList,
-    VListItem,
-    VListItemContent,
-    VListItemSubtitle,
-    VListItemTitle,
-    VListItemGroup,
-  },
 
   props: {
     selectedMarkerId: {

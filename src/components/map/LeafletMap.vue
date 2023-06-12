@@ -48,11 +48,21 @@
 <script lang="ts">
 import Vue, { PropType } from 'vue';
 
-import { VBtn } from 'vuetify/lib';
 import { mdiPlus } from '@mdi/js';
 
 import L, { LeafletMouseEvent } from 'leaflet';
-import { LControl, LMap, LMarker, LPopup, LTileLayer, LTooltip } from 'vue2-leaflet';
+import {
+  /* webpackChunkName: 'vue2leaflet-components' */
+  /* webpackMode: 'lazy-once' */
+  /* webpackPrefetch: true */
+  /* webpackPreload: true */
+  LControl,
+  LMap,
+  LMarker,
+  LPopup,
+  LTileLayer,
+  LTooltip,
+} from 'vue2-leaflet';
 
 import type { Coordinates, Marker } from '@/types';
 import { DEFAULT_COORDINATES, DEFAULT_ZOOM } from '@/store/modules/map/consts';
@@ -76,7 +86,6 @@ export default Vue.extend({
   name: 'LeafletMap',
 
   components: {
-    VBtn,
     LControl,
     LMap,
     LMarker,

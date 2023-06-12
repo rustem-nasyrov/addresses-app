@@ -49,8 +49,6 @@
 import Vue from 'vue';
 import { mapActions, mapGetters } from 'vuex';
 
-import { VSnackbar } from 'vuetify/lib';
-
 import { SNACKBAR_TIMEOUT } from '@/consts';
 import { getUserCoordinates } from '@/utils';
 
@@ -60,9 +58,20 @@ export default Vue.extend({
   name: 'MapView',
 
   components: {
-    MarkersCard: () => import('@/components/map/MarkersCard.vue'),
-    LeafletMap: () => import('@/components/map/LeafletMap.vue'),
-    VSnackbar,
+    MarkersCard: () => import(
+      /* webpackChunkName: 'map-view' */
+      /* webpackMode: 'lazy' */
+      /* webpackPrefetch: true */
+      /* webpackPreload: true */
+      '@/components/map/MarkersCard.vue',
+    ),
+    LeafletMap: () => import(
+      /* webpackChunkName: 'map-view' */
+      /* webpackMode: 'lazy' */
+      /* webpackPrefetch: true */
+      /* webpackPreload: true */
+      '@/components/map/LeafletMap.vue',
+    ),
   },
 
   computed: {

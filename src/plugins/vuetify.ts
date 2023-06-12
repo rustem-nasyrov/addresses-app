@@ -1,8 +1,54 @@
 import Vue from 'vue';
-import Vuetify, { VApp, VAppBar, VAppBarTitle, VCol, VContainer, VMain, VRow, VTab, VTabs } from 'vuetify/lib';
+import Vuetify, {
+  /* webpackChunkName: 'vuetify-components' */
+  /* webpackMode: 'lazy-once' */
+  /* webpackPrefetch: true */
+  /* webpackPreload: true */
+  VApp,
+  VAppBar,
+  VAppBarTitle,
+  VBtn,
+  VCard,
+  VCardText,
+  VCardTitle,
+  VCol,
+  VContainer,
+  VList,
+  VListItem,
+  VListItemContent,
+  VListItemGroup,
+  VListItemSubtitle,
+  VListItemTitle,
+  VMain,
+  VRow,
+  VSnackbar,
+  VTab,
+  VTabs,
+} from 'vuetify/lib';
 
 Vue.use(Vuetify, {
-  components: { VApp, VAppBar, VAppBarTitle, VCol, VContainer, VMain, VRow, VTab, VTabs },
+  components: {
+    VApp,
+    VAppBar,
+    VAppBarTitle,
+    VBtn,
+    VCard,
+    VCardText,
+    VCardTitle,
+    VCol,
+    VContainer,
+    VList,
+    VListItem,
+    VListItemContent,
+    VListItemGroup,
+    VListItemSubtitle,
+    VListItemTitle,
+    VMain,
+    VRow,
+    VSnackbar,
+    VTab,
+    VTabs,
+  },
 });
 
 const options = {
