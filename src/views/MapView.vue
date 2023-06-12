@@ -13,7 +13,7 @@
         <markers-card
           :markers="markers"
           :selected-marker-id="selectedMarkerId"
-          @on-select-marker="onMarkerSelect"
+          @on-select-marker="onSelectMarker"
         />
       </v-col>
       <v-col
@@ -27,7 +27,7 @@
           @on-coordinates-update="setCoordinates"
           @on-zoom-update="setZoom"
           @on-add-marker="onAddMarker"
-          @on-marker-click="selectMarkerId"
+          @on-marker-click="onSelectMarker"
         />
         <v-snackbar
           :value="snackbarVisible"
@@ -101,12 +101,18 @@ export default Vue.extend({
       });
     },
 
-    onMarkerSelect(id: number) {
-      const { coordinates } = this.markers.find((m: { id: number }) => m.id === id) || {};
+    onSelectMarker(id?: number) {
+      if (!id) {
+        this.$router.push({ name: 'map' });
+        this.selectMarkerId(null);
+      } else {
+        const { coordinates } = this.markers.find((m: { id: number }) => m.id === id) || {};
 
-      if (coordinates) {
-        this.selectMarkerId(id);
-        this.setCoordinates(coordinates);
+        if (coordinates) {
+          this.selectMarkerId(id);
+          this.setCoordinates(coordinates);
+          this.$router.push({ name: 'marker', params: { id: id.toString() }});
+        }
       }
     },
   },
