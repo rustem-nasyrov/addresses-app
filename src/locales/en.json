@@ -1,0 +1,9 @@
+{
+  "appName": "Test task for the SquareGPS",
+  "en": "English",
+  "ru": "Russian",
+  "menu": {
+    "about": "About",
+    "map": "Map"
+  }
+}
