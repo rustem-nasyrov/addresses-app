@@ -73,6 +73,7 @@
             Пример:
             <br>
             <img
+              class="example-image"
               src="@/assets/images/example.jpg"
               alt="Пример страницы карт"
             >
@@ -90,3 +91,10 @@ export default Vue.extend({
   name: 'HomeView',
 });
 </script>
+
+<style scoped lang="scss">
+.example-image {
+  display: block;
+  width: 100%;
+}
+</style>
