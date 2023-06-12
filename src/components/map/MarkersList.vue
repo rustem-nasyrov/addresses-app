@@ -17,9 +17,7 @@
           <v-list-item-title>
             {{ item.displayName }}
           </v-list-item-title>
-          <v-list-item-subtitle>
-            {{ item.latitude }}, {{ item.longitude }}
-          </v-list-item-subtitle>
+          <v-list-item-subtitle> {{ item.latitude }}, {{ item.longitude }} </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
     </v-list-item-group>

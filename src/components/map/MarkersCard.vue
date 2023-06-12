@@ -25,13 +25,14 @@ export default Vue.extend({
   name: 'MarkersCard',
 
   components: {
-    MarkersList: () => import(
-      /* webpackChunkName: 'map-view' */
-      /* webpackMode: 'lazy-once' */
-      /* webpackPrefetch: true */
-      /* webpackPreload: true */
-      '@/components/map/MarkersList.vue',
-    ),
+    MarkersList: () =>
+      import(
+        /* webpackChunkName: 'map-view' */
+        /* webpackMode: 'lazy-once' */
+        /* webpackPrefetch: true */
+        /* webpackPreload: true */
+        '@/components/map/MarkersList.vue'
+      ),
   },
 
   props: {

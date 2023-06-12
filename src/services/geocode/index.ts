@@ -2,7 +2,7 @@ import { apiService } from '@/api';
 
 import type { Coordinates } from '@/types';
 import type { GeocodeResponseRaw, GeocodeData } from '@/types';
-import {normalizeGeocodeResponse} from '@/services/geocode/utils';
+import { normalizeGeocodeResponse } from '@/services/geocode/utils';
 
 class Geocode {
   private api = apiService;

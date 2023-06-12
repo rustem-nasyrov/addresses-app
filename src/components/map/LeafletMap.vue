@@ -80,7 +80,7 @@ type LeafletMapData = {
   mapZoom: number;
   center: Coordinates | [];
   [key: string]: unknown;
-}
+};
 
 export default Vue.extend({
   name: 'LeafletMap',
@@ -134,7 +134,7 @@ export default Vue.extend({
       this.$emit('on-zoom-update', zoom);
     },
 
-    onCenterUpdate({ lat, lng }: { lat: number, lng: number }) {
+    onCenterUpdate({ lat, lng }: { lat: number; lng: number }) {
       this.center = [lat, lng];
       this.$emit('on-coordinates-update', [lat, lng]);
     },

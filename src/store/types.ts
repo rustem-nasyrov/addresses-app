@@ -7,5 +7,5 @@ export type RootState = {
   modules: {
     markers: StoreOptions<MarkersState>;
     map: StoreOptions<MapState>;
-  }
-}
+  };
+};

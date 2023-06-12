@@ -18,7 +18,7 @@ class ApiService implements Api {
       return [data, null];
     } catch (error: unknown) {
       if ((error as Error).message) {
-        return [null, (error as Error).message]
+        return [null, (error as Error).message];
       }
 
       return [null, error];

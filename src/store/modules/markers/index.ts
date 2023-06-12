@@ -13,8 +13,8 @@ const createMarker = (data: GeocodeData): Marker => {
   return {
     ...data,
     coordinates: [+data.latitude, +data.longitude],
-  }
-}
+  };
+};
 
 export const MarkersModule: Module<MarkersState, RootState> = {
   namespaced: true,
@@ -53,7 +53,7 @@ export const MarkersModule: Module<MarkersState, RootState> = {
           await dispatch('updateSnackbar', {
             visible: true,
             message: 'Already added',
-          })
+          });
         } else {
           commit(ADD_MARKER, createMarker(data));
         }

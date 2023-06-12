@@ -9,7 +9,7 @@ export const getUserCoordinates = (cb: (args: unknown[]) => unknown) => {
 
   const onSuccess = ({ coords }: GeolocationPosition) => {
     cb([coords.latitude, coords.longitude]);
-  }
+  };
 
   const onError = () => {
     console.warn(`Can not access to user' geolocation.`);

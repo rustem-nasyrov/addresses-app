@@ -1,7 +1,7 @@
 export type AppBarTab = {
   to: string;
   label: string;
-}
+};
 
 export type GeocodeAddressRaw = {
   road?: string;
@@ -46,9 +46,8 @@ export type GeocodeData = {
   address: GeocodeAddress;
 };
 
-
 export type Coordinates = [number, number];
 
 export type Marker = GeocodeData & {
   coordinates: Coordinates;
-}
+};

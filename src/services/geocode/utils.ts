@@ -18,5 +18,5 @@ export const normalizeGeocodeResponse = (data: GeocodeResponseRaw): GeocodeData 
     longitude: data.lon,
     displayName: data.display_name,
     address,
-  }
+  };
 };

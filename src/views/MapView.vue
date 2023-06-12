@@ -58,20 +58,22 @@ export default Vue.extend({
   name: 'MapView',
 
   components: {
-    MarkersCard: () => import(
-      /* webpackChunkName: 'map-view' */
-      /* webpackMode: 'lazy' */
-      /* webpackPrefetch: true */
-      /* webpackPreload: true */
-      '@/components/map/MarkersCard.vue',
-    ),
-    LeafletMap: () => import(
-      /* webpackChunkName: 'map-view' */
-      /* webpackMode: 'lazy' */
-      /* webpackPrefetch: true */
-      /* webpackPreload: true */
-      '@/components/map/LeafletMap.vue',
-    ),
+    MarkersCard: () =>
+      import(
+        /* webpackChunkName: 'map-view' */
+        /* webpackMode: 'lazy' */
+        /* webpackPrefetch: true */
+        /* webpackPreload: true */
+        '@/components/map/MarkersCard.vue'
+      ),
+    LeafletMap: () =>
+      import(
+        /* webpackChunkName: 'map-view' */
+        /* webpackMode: 'lazy' */
+        /* webpackPrefetch: true */
+        /* webpackPreload: true */
+        '@/components/map/LeafletMap.vue'
+      ),
   },
 
   computed: {
@@ -86,7 +88,7 @@ export default Vue.extend({
     timeout: () => SNACKBAR_TIMEOUT,
   },
 
-  created () {
+  created() {
     getUserCoordinates(this.setCoordinates);
   },
 
@@ -120,7 +122,7 @@ export default Vue.extend({
         if (coordinates) {
           this.selectMarkerId(id);
           this.setCoordinates(coordinates);
-          this.$router.push({ name: 'marker', params: { id: id.toString() }});
+          this.$router.push({ name: 'marker', params: { id: id.toString() } });
         }
       }
     },

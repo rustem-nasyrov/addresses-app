@@ -35,15 +35,15 @@ export const MapModule: Module<MapState, RootState> = {
   },
 
   actions: {
-    selectMarkerId: ({commit}, id: number) => {
+    selectMarkerId: ({ commit }, id: number) => {
       commit(SELECT_MARKER_ID, id);
     },
 
-    setCoordinates: ({commit}, coordinates: Coordinates) => {
+    setCoordinates: ({ commit }, coordinates: Coordinates) => {
       commit(UPDATE_COORDINATES, coordinates);
     },
 
-    setZoom: ({commit}, zoom) => {
+    setZoom: ({ commit }, zoom) => {
       commit(UPDATE_ZOOM, zoom);
     },
   },
@@ -53,4 +53,4 @@ export const MapModule: Module<MapState, RootState> = {
     selectedMarkerId: (state) => state.selectedMarkerId,
     zoom: (state) => state.zoom,
   },
-}
+};

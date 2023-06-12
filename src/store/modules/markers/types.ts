@@ -5,5 +5,5 @@ export type MarkersState = {
     visible: boolean;
     message: string;
   };
-  markers:  Marker[];
-}
+  markers: Marker[];
+};
