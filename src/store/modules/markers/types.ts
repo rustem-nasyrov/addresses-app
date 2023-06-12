@@ -2,8 +2,9 @@ import { Marker } from '@/types';
 
 export type MarkersState = {
   snackbar: {
-    visible: boolean;
+    color: string;
     message: string;
+    visible: boolean;
   };
   markers: Marker[];
 };
