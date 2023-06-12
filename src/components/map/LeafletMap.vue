@@ -11,6 +11,19 @@
       :url="url"
       :attribution="attribution"
     />
+    <l-control
+      v-if="$vuetify.breakpoint.xsOnly"
+      position="topright"
+    >
+      <v-btn
+        fab
+        @click="$emit('on-toggle-drawer')"
+      >
+        <v-icon>
+          {{ mdiMenu }}
+        </v-icon>
+      </v-btn>
+    </l-control>
     <l-control position="bottomright">
       <v-btn
         fab
@@ -48,7 +61,7 @@
 <script lang="ts">
 import Vue, { PropType } from 'vue';
 
-import { mdiPlus } from '@mdi/js';
+import { mdiPlus, mdiMenu } from '@mdi/js';
 
 import L, { LeafletMouseEvent } from 'leaflet';
 import {
@@ -118,6 +131,7 @@ export default Vue.extend({
       center: this.coordinates,
       mapZoom: this.zoom,
       mdiPlus,
+      mdiMenu,
       url: OPEN_STREET_MAP_URL,
     };
   },

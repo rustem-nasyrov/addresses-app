@@ -9,25 +9,28 @@
       no-gutters
       class="fill-height"
     >
-      <v-col cols="3">
-        <markers-card
+      <v-col
+        cols="12"
+        class="fill-height d-flex"
+      >
+        <markers-sidebar
+          :is-open="isDrawerOpen"
           :markers="markers"
           :selected-marker-id="selectedMarkerId"
+          class="col-3"
           @on-select-marker="onSelectMarker"
+          @on-toggle-drawer="onToggleDrawer"
         />
-      </v-col>
-      <v-col
-        cols="9"
-        class="fill-height"
-      >
         <leaflet-map
           :coordinates="coordinates"
           :zoom="zoom"
           :markers="markers"
+          class="9"
           @on-coordinates-update="setCoordinates"
           @on-zoom-update="setZoom"
           @on-add-marker="onAddMarker"
           @on-marker-click="onSelectMarker"
+          @on-toggle-drawer="onToggleDrawer(!isDrawerOpen)"
         />
         <v-snackbar
           :value="snackbar.visible"
@@ -58,13 +61,13 @@ export default Vue.extend({
   name: 'MapView',
 
   components: {
-    MarkersCard: () =>
+    MarkersSidebar: () =>
       import(
         /* webpackChunkName: 'map-view' */
         /* webpackMode: 'lazy' */
         /* webpackPrefetch: true */
         /* webpackPreload: true */
-        '@/components/map/MarkersCard.vue'
+        '@/components/map/MarkersSidebar.vue'
       ),
     LeafletMap: () =>
       import(
@@ -75,6 +78,10 @@ export default Vue.extend({
         '@/components/map/LeafletMap.vue'
       ),
   },
+
+  data: () => ({
+    isDrawerOpen: false,
+  }),
 
   computed: {
     ...mapGetters({
@@ -90,6 +97,7 @@ export default Vue.extend({
   async created() {
     await this.getAllMarkers();
     getUserCoordinates(this.setCoordinates);
+    this.isDrawerOpen = !this.$vuetify.breakpoint.xs;
   },
 
   methods: {
@@ -104,6 +112,10 @@ export default Vue.extend({
 
     onAddMarker(coordinates: Coordinates) {
       this.addMarker(coordinates);
+    },
+
+    onToggleDrawer(value: boolean) {
+      this.isDrawerOpen = value;
     },
 
     closeSnackbar(value: boolean) {
@@ -136,6 +148,6 @@ export default Vue.extend({
 
 <style lang="scss">
 .v-snack {
-  z-index: 999;
+  z-index: 3000;
 }
 </style>

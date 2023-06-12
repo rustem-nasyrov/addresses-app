@@ -20,6 +20,7 @@ import Vuetify, {
   VListItemSubtitle,
   VListItemTitle,
   VMain,
+  VNavigationDrawer,
   VRow,
   VSnackbar,
   VTab,
@@ -44,6 +45,7 @@ Vue.use(Vuetify, {
     VListItemSubtitle,
     VListItemTitle,
     VMain,
+    VNavigationDrawer,
     VRow,
     VSnackbar,
     VTab,
@@ -56,6 +58,9 @@ const options = {
     icons: {
       iconfont: 'mdiSvg',
     },
+  },
+  breakpoint: {
+    mobileBreakpoint: 600, // typing is broken, so I copied value for the 'xs' from the https://v2.vuetifyjs.com/en/features/breakpoints/
   },
 };
 
