@@ -46,3 +46,9 @@ export default Vue.extend({
   },
 });
 </script>
+
+<style lang="scss">
+.v-list {
+  padding: 0;
+}
+</style>
