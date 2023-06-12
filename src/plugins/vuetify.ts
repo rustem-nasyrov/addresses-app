@@ -59,6 +59,9 @@ const options = {
       iconfont: 'mdiSvg',
     },
   },
+  breakpoint: {
+    mobileBreakpoint: 600, // typing is broken, so I copied value for the 'xs' from the https://v2.vuetifyjs.com/en/features/breakpoints/
+  },
 };
 
 export default new Vuetify(options);
