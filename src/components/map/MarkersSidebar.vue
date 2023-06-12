@@ -16,7 +16,7 @@
         {{ mdiArrowLeft }}
       </v-icon>
       <h3 class="subtitle-1">
-        Маркеры
+        {{ $t('markers') }}
       </h3>
     </div>
 
@@ -30,7 +30,7 @@
       v-else
       class="empty-list-text"
     >
-      Список пуст
+      {{ $t('emptyList') }}
     </i>
   </v-navigation-drawer>
 </template>

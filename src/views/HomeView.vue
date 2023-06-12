@@ -4,37 +4,32 @@
       <v-col tag="article">
         <section id="title">
           <h1 class="display-1 mb-1">
-            Тестовое задание SquareGPS
+            {{ $t('views.about.section.main.title') }}
           </h1>
-          <p>
-            Необходимо с помощью <b>Vuejs</b>, <b>Vuex</b>, <b>VueRouter</b>, <b>Vuetify</b> написать приложение.
-            Хэдер приложения должен содержать меню из 2-х пунктов: О задании и Карта.
-            В основной части приложения должно отображаться содержимое разделов.
-          </p>
+          <p v-html="$t('views.about.section.main.text')" />
         </section>
         <section id="about">
           <h2 class="headline mb-1">
-            Раздел “О задании”
+            {{ $t('views.about.section.about.title') }}
           </h2>
           <p>
-            В разделе должен быть текст этого задания, сверстанный аналогично.
+            {{ $t('views.about.section.about.text') }}
           </p>
         </section>
         <section id="map">
           <h2 class="headline mb-1">
-            Раздел “Карта”
+            {{ $t('views.about.section.map.title') }}
           </h2>
           <p>
-            На экране должны быть карта и список (<a href="#example">см. пример</a>):
+            <span v-html="$t('views.about.section.map.text[0]')" />
             <ol>
               <li>
-                При клике на кнопку добавления, карта должна перейти в режим добавления маркера: в месте клика должен
-                появится маркер, а в списке - запись с адресом точки.
+                {{ $t('views.about.section.map.list[0]') }}
               </li>
             </ol>
           </p>
           <p>
-            Для поиска адреса можно использовать любое бесплатное API для геокодирования, например:
+            {{ $t('views.about.section.map.text[1]') }}
             <a
               href="https://geocode.maps.co/"
               target="_blank"
@@ -44,38 +39,33 @@
             </a>
           </p>
           <p>
-            В случае, если адрес не найден, необходимо вывести ошибку и не добавлять маркер в список.
+            {{ $t('views.about.section.map.text[2]') }}
             <br>
             <ol start="2">
-              <li>При клике на маркер должна подсвечиваться запись в списке</li>
-              <li>При клике на запись в списке карта должна центрироваться на маркере</li>
-              <li>Маркеры должны храниться локально и не пропадать после перезагрузки страницы</li>
-              <li>В адресной строке должен отображаться id выбранного маркера</li>
+              <li>{{ $t('views.about.section.map.list[1]') }}</li>
+              <li>{{ $t('views.about.section.map.list[2]') }}</li>
+              <li>{{ $t('views.about.section.map.list[3]') }}</li>
+              <li>{{ $t('views.about.section.map.list[4]') }}</li>
             </ol>
           </p>
           <p>
-            Локальное хранение данных должно быть организовано в виде сервиса, эмулирующего бекенд. (Необходим класс
-            Backend, который псевдо-асинхронно сохраняет данные в localStorage).
+            {{ $t('views.about.section.map.text[3]') }}
           </p>
           <p>
-            <b>Дополнительно:</b>
+            <b>{{ $t('views.about.additionally') }}</b>
             <ol>
-              <li>Продумать отображение на мобильных устройствах.</li>
-              <li>Предусмотреть локализацию.</li>
-              <li>Необходимо с помощью jest написть 1 модульный тест на любой компонент.</li>
+              <li>{{ $t('views.about.section.map.additionalList[0]') }}</li>
+              <li>{{ $t('views.about.section.map.additionalList[1]') }}</li>
+              <li>{{ $t('views.about.section.map.additionalList[2]') }}</li>
             </ol>
           </p>
-          <p>
-            <b>Напоминание:</b> тестовое задание призвано показать умение писать хороший модульный код, а также умение
-            пользоваться указанными технологиями и не только. Этим кодом нужно гордиться.
-          </p>
-          <p id="example">
-            Пример:
+          <p v-html="$t('views.about.note')" /><p id="example">
+            {{ $t('views.about.example') }}
             <br>
             <img
               class="example-image"
               src="@/assets/images/example.jpg"
-              alt="Пример страницы карт"
+              :alt="$t('view.about.exampleImageAlt')"
             >
           </p>
         </section>

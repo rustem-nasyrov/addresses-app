@@ -1,9 +1,54 @@
 {
-  "appName": "Test task for the SquareGPS",
+  "appName": "SquareGPS test task",
   "en": "English",
   "ru": "Russian",
   "menu": {
     "about": "About",
     "map": "Map"
+  },
+  "map": {
+    "latitude": "Latitude",
+    "longitude": "Longitude"
+  },
+  "markers": "Markers",
+  "emptyList": "List is empty",
+  "views": {
+    "about": {
+      "example": "Example",
+      "exampleImageAlt": "Maps page example",
+      "additionally": "Extras:",
+      "note": "<b>Note:</b> the test task is intended to show the ability to write good modular code, as well as the ability to use the specified technologies and not only. This code is something to be proud of.",
+      "section": {
+        "main": {
+          "title": "SquareGPS test task",
+          "text": "It is necessary to write an application with the help of <b>Vuejs</b>, <b>Vuex</b>, <b>VueRouter</b>, <b>Vuetify</b>. The header of the application should contain a menu of 2 items: About and Map. The main part of the application should display the contents of the sections."
+        },
+        "about": {
+          "title": "Section “About the task”",
+          "text": "The section should have the text of this assignment, laid out similarly."
+        },
+        "map": {
+          "title": "Section “Map”",
+          "text": [
+            "The screen should have a map and list (<a href=\"#example\">see example</a>):",
+            "You can use any free geocoding API to find the address, for example:",
+            "In case the address is not found, an error should be displayed and the marker should not be added to the list.",
+            "Local data storage should be organized as a service that emulates a backend. (A Backend class that pseudo-asynchronously saves data to localStorage is needed)."
+          ],
+          "list": [
+            "When you click on the add button, the map must go into add marker mode: a marker must appear at the clicked place, and a record with the point's address must appear in the list.",
+            "When you click on the marker, the record in the list should be highlighted",
+            "When clicking on a record in the list, the map should be centered on the marker",
+            "Markers should be stored locally and not disappear after a page reload.",
+            "The id of the selected marker should be displayed in the address bar"
+          ],
+          "additionalList": [
+            "Think about displaying on mobile devices.",
+            "Provide for localization.",
+            "You need to use jest to write 1 unit test for any component."
+          ]
+        }
+      }
+    }
   }
 }

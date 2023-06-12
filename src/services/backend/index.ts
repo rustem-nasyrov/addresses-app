@@ -1,5 +1,5 @@
 import type { BackendService, BackendServiceResponse } from '@/services/backend/types';
-import { Marker } from '@/types';
+import type { Marker } from '@/types';
 
 import { REJECT_STATUS_TEXT, SUCCESS_STATUS_TEXT } from '@/consts';
 
