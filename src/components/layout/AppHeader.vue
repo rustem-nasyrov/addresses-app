@@ -5,7 +5,12 @@
     flat
     :src="require('@/assets/images/cover.jpeg')"
   >
-    <v-app-bar-title>Тестовое задание SquareGPS</v-app-bar-title>
+    <v-app-bar-title>{{ $t('appName') }}</v-app-bar-title>
+
+    <v-spacer />
+
+    <language-switcher />
+
     <template #extension>
       <v-tabs>
         <v-tab
@@ -24,8 +29,17 @@
 import Vue, { PropType } from 'vue';
 import type { AppBarTab } from '@/types';
 
+import { VSpacer } from 'vuetify/lib';
+
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher.vue';
+
 export default Vue.extend({
   name: 'AppBar',
+
+  components: {
+    VSpacer,
+    LanguageSwitcher,
+  },
 
   props: {
     tabs: {
