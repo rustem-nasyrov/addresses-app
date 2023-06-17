@@ -12,6 +12,7 @@ import type { Coordinates, GeocodeData, Marker } from '@/types';
 import type { RootState } from '@/store/types';
 import type { MarkersState } from '@/store/modules/markers/types';
 
+import i18n from '@/locales';
 import { backendService } from '@/services/backend';
 import { geocodeService } from '@/services/geocode';
 
@@ -65,25 +66,25 @@ export const MarkersModule: Module<MarkersState, RootState> = {
 
         if (markers.findIndex((m: Marker) => m.id === data.id) > -1) {
           await dispatch('updateSnackbar', {
+            message: i18n.t('messages-codes.marker-already-added'),
             visible: true,
-            message: 'Already added',
             color: SNACKBAR_ERROR_COLOR,
           });
         } else {
           const marker = createMarker(data);
-          const { status} = await backendService.addMarker<Marker>(marker);
+          const { status, message} = await backendService.addMarker<Marker>(marker);
 
           if (SUCCESS_STATUS_TEXT === status) {
             await dispatch('updateSnackbar', {
+              message,
               visible: true,
-              message: 'Added',
               color: SNACKBAR_SUCCESS_COLOR,
             });
             commit(ADD_MARKER, marker);
           } else {
             await dispatch('updateSnackbar', {
+              message,
               visible: true,
-              message: 'Something went wrong',
               color: SNACKBAR_ERROR_COLOR,
             });
           }
@@ -96,14 +97,14 @@ export const MarkersModule: Module<MarkersState, RootState> = {
     },
 
     getMarkers: async ({ commit, dispatch }) => {
-      const { status, data } = await backendService.getAllMarkers();
+      const { status, message, data } = await backendService.getAllMarkers();
 
       if (SUCCESS_STATUS_TEXT === status) {
         commit(REPLACE_MARKERS, data);
       } else {
         await dispatch('updateSnackbar', {
+          message,
           visible: true,
-          message: 'Failed to fetch markers',
           color: SNACKBAR_ERROR_COLOR,
         });
       }

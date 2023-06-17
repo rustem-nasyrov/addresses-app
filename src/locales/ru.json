@@ -2,6 +2,14 @@
   "appName": "Тестовое задание SquareGPS",
   "en": "Английский",
   "ru": "Русский",
+  "messages-codes": {
+    "can-not-recognize-address": "Ошибка распознавания адреса",
+    "marker-already-added": "Маркер уже добавлен",
+    "get-all-markers":  "Все маркеры получены",
+    "reject-all-markers": "Не удалось получить все маркеры",
+    "add-message-success":  "Маркер добавлен успешно",
+    "add-message-reject": "Не удалось добавить маркер"
+  },
   "menu": {
     "about": "О задании",
     "map": "Карта"

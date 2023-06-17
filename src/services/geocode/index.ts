@@ -1,4 +1,5 @@
 import { apiService } from '@/api';
+import i18n from '@/locales';
 
 import type { Coordinates } from '@/types';
 import type { GeocodeResponseRaw, GeocodeData } from '@/types';
@@ -16,7 +17,7 @@ class Geocode {
     const [response, error] = await this.api.get<GeocodeResponseRaw>(url);
 
     if (!response) {
-      return [response, error];
+      return [response, i18n.t('messages-codes.can-not-recognize-address')];
     }
 
     return [normalizeGeocodeResponse(response), error];

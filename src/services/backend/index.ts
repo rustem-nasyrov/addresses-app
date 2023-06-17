@@ -1,6 +1,8 @@
 import type { BackendService, BackendServiceResponse } from '@/services/backend/types';
 import type { Marker } from '@/types';
 
+import i18n from '@/locales';
+
 import { REJECT_STATUS_TEXT, SUCCESS_STATUS_TEXT } from '@/consts';
 
 const STORAGE_MARKER_KEY = 'markers';
@@ -27,11 +29,13 @@ class Backend implements BackendService {
       if ('localStorage' in window) {
         resolve({
           status: SUCCESS_STATUS_TEXT,
+          message: i18n.t('messages-codes.get-all-markers') as string,
           data: markers,
         });
       } else {
         reject({
           status: REJECT_STATUS_TEXT,
+          message: i18n.t('messages-codes.reject-all-markers') as string,
         });
       }
     });
@@ -47,10 +51,12 @@ class Backend implements BackendService {
 
         resolve({
           status: SUCCESS_STATUS_TEXT,
+          message: i18n.t('messages-codes.add-message-success') as string,
         });
       } else {
         reject({
           status: REJECT_STATUS_TEXT,
+          message: i18n.t('messages-codes.add-message-reject') as string,
         });
       }
     });
