@@ -2,6 +2,7 @@ import type { Marker } from '@/types';
 
 export type BackendServiceResponse<T = unknown> = Promise<{
   status: string;
+  message: string;
   data?: T;
 }>;
 

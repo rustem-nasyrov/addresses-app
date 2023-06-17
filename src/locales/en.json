@@ -2,6 +2,14 @@
   "appName": "SquareGPS test task",
   "en": "English",
   "ru": "Russian",
+  "messages-codes": {
+    "can-not-recognize-address": "Can not get address",
+    "marker-already-added": "Marker already added",
+    "get-all-markers":  "Got all markers",
+    "reject-all-markers": "Can not get all markers",
+    "add-message-success":  "Marker added successfully",
+    "add-message-reject": "Can not add marker"
+  },
   "menu": {
     "about": "About",
     "map": "Map"
