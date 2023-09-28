@@ -1,5 +1,5 @@
 # Address app
-An application with two pages: About, Map. Where is `about` page contains test task definition, and `map` page has a list of map markers and map component.
+An application with two pages: About, Map. Where is `about` page contains test task definition, and `map` page have a list of map markers and map component.
 
 ## Stack:
 - Vue v2.
